@@ -81,9 +81,3 @@ XDG_CACHE_HOME=/tmp/recipe-cache APPIMAGE_EXTRACT_AND_RUN=1 xtool dev run --usb
 ```
 
 An Xcode project can be generated with `xtool dev generate-xcode-project` for development on macOS.
-
-## Reference material and assets
-
-The supplied SwiftUI assignment PDF defines the requirements. The Mise HTML prototype provides the visual reference and sample recipe content. Its eight embedded photos are bundled locally using SwiftPM resources. The prototype’s image references point to TheMealDB; photo ownership remains with the respective rights holders.
-
-The interface uses system fonts and SF Symbols. Method durations are informational labels without a running timer. Search and serving selections are temporary UI state and are not saved between launches.
