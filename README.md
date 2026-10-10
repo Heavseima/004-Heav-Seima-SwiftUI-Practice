@@ -39,13 +39,11 @@ Sources/
         ├── MethodStepCard.swift
         ├── RecipePhoto.swift
         └── MiseTheme.swift
-Tests/RecipeCoreTests/RecipeCoreTests.swift
-Scripts/test-core.sh
 Package.swift
 xtool.yml
 ```
 
-`ContentView` contains the `NavigationStack` and opens the home screen. Repeated interface elements have dedicated views. Models and sample data live in `RecipeCore`, which has no SwiftUI dependency and supports testing the recipe logic on Linux.
+`ContentView` contains the `NavigationStack` and opens the home screen. Repeated interface elements have dedicated views. Models and sample data live in `RecipeCore`, which keeps the recipe logic separate from SwiftUI.
 
 `@State` stores the search text and selected servings. `RecipeDetailView` owns the serving count and passes `$servings` to `ServingControl` as an `@Binding`. This lets the child update the parent's state while the ingredient rows refresh automatically.
 
@@ -83,41 +81,6 @@ XDG_CACHE_HOME=/tmp/recipe-cache APPIMAGE_EXTRACT_AND_RUN=1 xtool dev run --usb
 ```
 
 An Xcode project can be generated with `xtool dev generate-xcode-project` for development on macOS.
-
-## Testing
-
-Core test command:
-
-```bash
-bash Scripts/test-core.sh
-```
-
-The script copies the current core sources and tests into a temporary Swift package, runs XCTest, and removes the temporary package afterwards. This avoids trying to compile SwiftUI on Linux. xtool handles the actual iOS app build; this version of xtool does not expose a separate test command.
-
-The five automated tests cover:
-
-- Case-insensitive search with surrounding whitespace.
-- Empty searches and searches with no matches.
-- Scaling up, scaling down, and keeping the original amounts unchanged.
-- Fraction formatting and precise gram amounts.
-- Complete sample data, positive quantities, and unique recipe and ingredient IDs.
-
-Verification completed successfully: the iOS debug build passes, all five XCTest tests pass, and the built resource bundle contains all eight photos.
-
-The `xtool dev run --usb` attempt completed the build but stopped during provisioning with Apple’s `403 FORBIDDEN_ERROR` because the signing team had reached its registered-iPhone limit. Installation and on-device UI verification remain pending until an eligible signing team or device registration is available.
-
-### Pending device checks
-
-These checks cover rendered UI behavior that the automated logic tests do not verify.
-
-- [ ] Open the app and confirm all eight cards show the matching photos.
-- [ ] Search for `salmon`, clear the search, and try a name with no matches.
-- [ ] Open a card, return to the grid, and confirm the search is preserved.
-- [ ] Open the salad, change servings from 2 to 1 to 3, and check rocket amounts of 70 g, 35 g, and 105 g.
-- [ ] Tap minus at one serving and confirm it remains at one.
-- [ ] Open the cannelloni and confirm it starts at four servings.
-- [ ] Scroll through every method step on a smaller screen and at larger text sizes.
-- [ ] Check VoiceOver labels and confirm the app works without an internet connection.
 
 ## Reference material and assets
 

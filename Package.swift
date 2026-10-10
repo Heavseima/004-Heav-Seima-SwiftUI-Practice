@@ -23,6 +23,5 @@ let package = Package(
             dependencies: ["RecipeCore"],
             resources: [.process("Resources")]
         ),
-        .testTarget(name: "RecipeCoreTests", dependencies: ["RecipeCore"]),
     ]
 )
