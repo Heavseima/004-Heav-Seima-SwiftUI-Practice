@@ -8,6 +8,10 @@ struct RecipeCard: View {
         VStack(alignment: .leading, spacing: 8) {
             RecipePhoto(name: recipe.id, height: 148)
                 .clipShape(RoundedRectangle(cornerRadius: 18))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 18)
+                        .strokeBorder(MiseTheme.ink.opacity(0.06), lineWidth: 1)
+                }
             Text(recipe.name)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(MiseTheme.ink)

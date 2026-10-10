@@ -25,9 +25,7 @@ struct RecipeHomeView: View {
                 } else {
                     LazyVGrid(columns: columns, alignment: .leading, spacing: 20) {
                         ForEach(filteredRecipes) { recipe in
-                            NavigationLink {
-                                RecipeDetailView(recipe: recipe)
-                            } label: {
+                            NavigationLink(value: recipe.id) {
                                 RecipeCard(recipe: recipe)
                             }
                             .buttonStyle(.plain)
@@ -42,6 +40,11 @@ struct RecipeHomeView: View {
         .background(MiseTheme.background)
         .toolbar(.hidden, for: .navigationBar)
         .scrollDismissesKeyboard(.interactively)
+        .navigationDestination(for: String.self) { recipeID in
+            if let recipe = SampleRecipes.all.first(where: { $0.id == recipeID }) {
+                RecipeDetailView(recipe: recipe)
+            }
+        }
     }
 
     private var header: some View {
