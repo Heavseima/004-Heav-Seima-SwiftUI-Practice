@@ -1,10 +1,10 @@
-# Mise — My SwiftUI Recipe App
+# Mise — SwiftUI Recipe App
 
-I built this project for my SwiftUI fundamentals recipe UI assignment. I used the assignment PDF to decide what to implement and the supplied Mise prototype as my reference for the recipe content, photos, colors, and layout.
+This project is about practicing SwiftUI fundamentals through a recipe browsing app. The assignment PDF defines the requirements, and the supplied Mise prototype provides the reference for recipe content, photos, colors, and layout.
 
-I focused on the two required screens: browsing recipes and viewing a recipe's details. The larger HTML prototype also contains favorites, planning, shopping, and recipe creation; I kept those outside this assignment's scope.
+The app covers two required screens: a recipe grid and a recipe detail screen. Favorites, meal planning, shopping lists, and recipe creation from the larger HTML prototype are outside the assignment scope.
 
-## What I implemented
+## Features
 
 - A home screen with the current date and “What’s cooking?” heading.
 - A two-column grid with eight recipes, local photos, cooking times, and serving counts.
@@ -12,11 +12,11 @@ I focused on the two required screens: browsing recipes and viewing a recipe's d
 - Navigation from each recipe card to a scrollable detail screen, with a back button.
 - A hero photo, category, description, ingredient list, and numbered method cards.
 - Serving controls that start at each recipe's base serving count and never go below one.
-- Ingredient quantities that update when I change the servings, without changing the original recipe data.
+- Ingredient quantities that update when the serving count changes, without changing the original recipe data.
 
-I used a warm cream background, serif headings, rounded photos, and a terracotta accent to stay close to the reference. I kept the light appearance intentional. My text uses Dynamic Type styles, the controls have accessibility labels, and the serving buttons have 44-point touch targets.
+The interface follows the reference with a warm cream background, serif headings, rounded photos, and a terracotta accent. The app uses a light appearance, Dynamic Type text styles, accessibility labels, and 44-point touch targets for serving controls.
 
-## How I organized the code
+## Project structure
 
 ```text
 Sources/
@@ -45,29 +45,29 @@ Package.swift
 xtool.yml
 ```
 
-I kept `ContentView` small: it owns the `NavigationStack` and opens the home screen. Each repeated part of the interface has its own view. I put the models and sample data in `RecipeCore`, which has no SwiftUI dependency, so I can test the recipe logic on Linux.
+`ContentView` contains the `NavigationStack` and opens the home screen. Repeated interface elements have dedicated views. Models and sample data live in `RecipeCore`, which has no SwiftUI dependency and supports testing the recipe logic on Linux.
 
-I use `@State` for the search text and selected servings. `RecipeDetailView` owns the serving count and passes `$servings` to `ServingControl` as an `@Binding`. This lets the child update the parent's state while the ingredient rows refresh automatically.
+`@State` stores the search text and selected servings. `RecipeDetailView` owns the serving count and passes `$servings` to `ServingControl` as an `@Binding`. This lets the child update the parent's state while the ingredient rows refresh automatically.
 
-My scaling calculation is:
+Ingredient scaling uses the following calculation:
 
 ```swift
 baseQuantity * Double(selectedServings) / Double(baseServings)
 ```
 
-For example, the salad's 70 g of rocket for two people becomes 35 g for one person or 105 g for three. I calculate from the original amount every time, so changing servings repeatedly does not accumulate rounding errors. I display common fractions as ¼, ½, and ¾, and other amounts with up to two decimal places.
+For example, the salad's 70 g of rocket for two servings becomes 35 g for one serving or 105 g for three servings. Each calculation starts from the original amount to avoid accumulating rounding errors. Common fractions appear as ¼, ½, and ¾; other amounts display up to two decimal places.
 
 ## Building with xtool
 
-I target iOS 17 or later. My development setup uses Swift 6.4, xtool, and the installed Darwin Swift SDK. I don't need any third-party packages or network services inside the app.
+The app targets iOS 17 or later. The verified development setup uses Swift 6.4, xtool, and the Darwin Swift SDK. The app has no third-party package dependencies or runtime network services.
 
-From the project folder, I build with:
+Build command from the project folder:
 
 ```bash
 xtool dev build
 ```
 
-On my Linux setup, the AppImage cannot mount through FUSE, so I use its extraction mode and a writable cache:
+For Linux environments where FUSE mounting is unavailable, AppImage extraction mode and a writable cache provide an alternative:
 
 ```bash
 XDG_CACHE_HOME=/tmp/recipe-cache APPIMAGE_EXTRACT_AND_RUN=1 xtool dev build
@@ -75,18 +75,18 @@ XDG_CACHE_HOME=/tmp/recipe-cache APPIMAGE_EXTRACT_AND_RUN=1 xtool dev build
 
 The output is `xtool/recipe_app.app`. A build without signing produces an app bundle; installing on an iPhone also needs xtool's Apple signing setup, a trusted connected device, and Developer Mode enabled.
 
-I use these commands to check the device and build, sign, install, and launch:
+Device discovery and build, signing, installation, and launch commands:
 
 ```bash
 APPIMAGE_EXTRACT_AND_RUN=1 xtool devices
 XDG_CACHE_HOME=/tmp/recipe-cache APPIMAGE_EXTRACT_AND_RUN=1 xtool dev run --usb
 ```
 
-If I need an Xcode project on a Mac, I can generate one with `xtool dev generate-xcode-project`.
+An Xcode project can be generated with `xtool dev generate-xcode-project` for development on macOS.
 
 ## Testing
 
-I run my core tests with:
+Core test command:
 
 ```bash
 bash Scripts/test-core.sh
@@ -94,7 +94,7 @@ bash Scripts/test-core.sh
 
 The script copies the current core sources and tests into a temporary Swift package, runs XCTest, and removes the temporary package afterwards. This avoids trying to compile SwiftUI on Linux. xtool handles the actual iOS app build; this version of xtool does not expose a separate test command.
 
-My five automated tests cover:
+The five automated tests cover:
 
 - Case-insensitive search with surrounding whitespace.
 - Empty searches and searches with no matches.
@@ -102,13 +102,13 @@ My five automated tests cover:
 - Fraction formatting and precise gram amounts.
 - Complete sample data, positive quantities, and unique recipe and ingredient IDs.
 
-I verified that the iOS debug build succeeds and all five XCTest tests pass. I also checked that all eight photos are included in the built resource bundle.
+Verification completed successfully: the iOS debug build passes, all five XCTest tests pass, and the built resource bundle contains all eight photos.
 
-I attempted `xtool dev run --usb` on the connected iPhone. The build succeeded, but Apple returned `403 FORBIDDEN_ERROR` during provisioning: “Your development team has reached the maximum number of registered iPhone devices.” I could not finish installation or verify the UI on the phone. Before I retry, I need an eligible signing team or an available device registration resolved through my Apple Developer account.
+The `xtool dev run --usb` attempt completed the build but stopped during provisioning with Apple’s `403 FORBIDDEN_ERROR` because the signing team had reached its registered-iPhone limit. Installation and on-device UI verification remain pending until an eligible signing team or device registration is available.
 
-### My device review checklist
+### Pending device checks
 
-I keep the following checks separate from the automated tests; the unit tests do not prove that the rendered UI is correct.
+These checks cover rendered UI behavior that the automated logic tests do not verify.
 
 - [ ] Open the app and confirm all eight cards show the matching photos.
 - [ ] Search for `salmon`, clear the search, and try a name with no matches.
@@ -121,6 +121,6 @@ I keep the following checks separate from the automated tests; the unit tests do
 
 ## Reference material and assets
 
-I used `Seima Heav - SwiftUI_Fundamentals_Recipe_UI_Assignment.pdf` for the requirements and `Seima Heav - Mise Prototype.html` for the visual reference and sample recipe content. I extracted the eight embedded photos from the supplied prototype and bundled them locally using SwiftPM resources. The prototype's image references point to TheMealDB. I do not claim ownership of those photos.
+The supplied SwiftUI assignment PDF defines the requirements. The Mise HTML prototype provides the visual reference and sample recipe content. Its eight embedded photos are bundled locally using SwiftPM resources. The prototype’s image references point to TheMealDB; photo ownership remains with the respective rights holders.
 
-I use system fonts and SF Symbols. Method durations are informational labels; I did not add a running timer. Search and serving selections are temporary UI state and are not saved between launches.
+The interface uses system fonts and SF Symbols. Method durations are informational labels without a running timer. Search and serving selections are temporary UI state and are not saved between launches.
