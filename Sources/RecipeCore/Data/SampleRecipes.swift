@@ -1,0 +1,118 @@
+import Foundation
+
+public enum SampleRecipes {
+    public static let all: [Recipe] = [
+        Recipe(id: "shak", name: "Shakshuka", category: "Breakfast", minutes: 25, baseServings: 2,
+               description: "Eggs poached in a spiced tomato and pepper sauce, finished with crumbled feta.", ingredients: [
+                   Ingredient(id: 0, name: "eggs", quantity: 4, unit: ""),
+                   Ingredient(id: 1, name: "crushed tomatoes", quantity: 400, unit: "g"),
+                   Ingredient(id: 2, name: "red pepper", quantity: 1, unit: ""),
+                   Ingredient(id: 3, name: "onion", quantity: 1, unit: ""),
+                   Ingredient(id: 4, name: "garlic", quantity: 3, unit: "cloves"),
+                   Ingredient(id: 5, name: "ground cumin", quantity: 1, unit: "tsp"),
+                   Ingredient(id: 6, name: "feta", quantity: 60, unit: "g"),
+               ], steps: [
+                   MethodStep(id: 1, instruction: "Warm the olive oil in a wide pan over medium heat.", seconds: 0),
+                   MethodStep(id: 2, instruction: "Add the pepper and onion. Cook until soft and just starting to colour.", seconds: 480),
+                   MethodStep(id: 3, instruction: "Stir in the garlic and cumin, then the tomatoes. Simmer until thick.", seconds: 600),
+                   MethodStep(id: 4, instruction: "Make four wells, crack in the eggs, cover and cook until the whites set.", seconds: 360),
+               ]),
+        Recipe(id: "benedict", name: "Salmon Eggs Benedict", category: "Breakfast", minutes: 20, baseServings: 2,
+               description: "Toasted muffins, smoked salmon and poached eggs under a quick lemon hollandaise.", ingredients: [
+                   Ingredient(id: 0, name: "english muffins", quantity: 2, unit: ""),
+                   Ingredient(id: 1, name: "smoked salmon", quantity: 150, unit: "g"),
+                   Ingredient(id: 2, name: "eggs", quantity: 6, unit: ""),
+                   Ingredient(id: 3, name: "butter", quantity: 100, unit: "g"),
+                   Ingredient(id: 4, name: "lemon", quantity: 1, unit: ""),
+                   Ingredient(id: 5, name: "chives", quantity: 1, unit: "bunch"),
+               ], steps: [
+                   MethodStep(id: 1, instruction: "Melt the butter and keep it warm.", seconds: 0),
+                   MethodStep(id: 2, instruction: "Whisk 2 yolks with lemon juice over simmering water, then slowly add the butter.", seconds: 300),
+                   MethodStep(id: 3, instruction: "Poach the remaining eggs in barely simmering water.", seconds: 180),
+                   MethodStep(id: 4, instruction: "Toast the muffins, then top with salmon, eggs and sauce.", seconds: 0),
+               ]),
+        Recipe(id: "pancake", name: "Fluffy Pancakes", category: "Breakfast", minutes: 20, baseServings: 2,
+               description: "Thick, soft pancakes stacked high with berries and maple syrup.", ingredients: [
+                   Ingredient(id: 0, name: "flour", quantity: 150, unit: "g"),
+                   Ingredient(id: 1, name: "milk", quantity: 200, unit: "ml"),
+                   Ingredient(id: 2, name: "egg", quantity: 1, unit: ""),
+                   Ingredient(id: 3, name: "baking powder", quantity: 2, unit: "tsp"),
+                   Ingredient(id: 4, name: "butter", quantity: 20, unit: "g"),
+                   Ingredient(id: 5, name: "blueberries", quantity: 125, unit: "g"),
+                   Ingredient(id: 6, name: "maple syrup", quantity: 3, unit: "tbsp"),
+               ], steps: [
+                   MethodStep(id: 1, instruction: "Whisk the flour and baking powder, then beat in the milk and egg.", seconds: 0),
+                   MethodStep(id: 2, instruction: "Rest the batter while the pan heats.", seconds: 300),
+                   MethodStep(id: 3, instruction: "Cook ladlefuls in butter until bubbles form, then flip.", seconds: 240),
+                   MethodStep(id: 4, instruction: "Stack and top with berries and syrup.", seconds: 0),
+               ]),
+        Recipe(id: "salad", name: "Salmon Avocado Salad", category: "Lunch", minutes: 15, baseServings: 2,
+               description: "Crisp-skinned salmon over rocket and avocado with a sharp lemon dressing.", ingredients: [
+                   Ingredient(id: 0, name: "salmon fillets", quantity: 2, unit: ""),
+                   Ingredient(id: 1, name: "avocado", quantity: 1, unit: ""),
+                   Ingredient(id: 2, name: "rocket", quantity: 70, unit: "g"),
+                   Ingredient(id: 3, name: "lemon", quantity: 1, unit: ""),
+                   Ingredient(id: 4, name: "olive oil", quantity: 2, unit: "tbsp"),
+               ], steps: [
+                   MethodStep(id: 1, instruction: "Season the salmon and start it skin-side down in a hot pan.", seconds: 360),
+                   MethodStep(id: 2, instruction: "Flip and cook for one more minute.", seconds: 60),
+                   MethodStep(id: 3, instruction: "Toss the rocket and avocado with lemon and oil, then top with the salmon.", seconds: 0),
+               ]),
+        Recipe(id: "fajitas", name: "Chickpea Fajitas", category: "Lunch", minutes: 25, baseServings: 2,
+               description: "Smoky roasted chickpeas and peppers in warm tortillas with lime guacamole.", ingredients: [
+                   Ingredient(id: 0, name: "chickpeas", quantity: 1, unit: "can"),
+                   Ingredient(id: 1, name: "red pepper", quantity: 1, unit: ""),
+                   Ingredient(id: 2, name: "onion", quantity: 1, unit: ""),
+                   Ingredient(id: 3, name: "smoked paprika", quantity: 1, unit: "tsp"),
+                   Ingredient(id: 4, name: "tortillas", quantity: 4, unit: ""),
+                   Ingredient(id: 5, name: "avocado", quantity: 1, unit: ""),
+                   Ingredient(id: 6, name: "lime", quantity: 1, unit: ""),
+               ], steps: [
+                   MethodStep(id: 1, instruction: "Toss the chickpeas, pepper and onion with paprika and oil.", seconds: 0),
+                   MethodStep(id: 2, instruction: "Roast at 200°C until crisp at the edges.", seconds: 1200),
+                   MethodStep(id: 3, instruction: "Mash the avocado with lime and a pinch of salt.", seconds: 0),
+                   MethodStep(id: 4, instruction: "Warm the tortillas and fill.", seconds: 0),
+               ]),
+        Recipe(id: "penne", name: "Spicy Arrabiata Penne", category: "Dinner", minutes: 25, baseServings: 2,
+               description: "Penne in a garlicky tomato sauce with plenty of chilli.", ingredients: [
+                   Ingredient(id: 0, name: "penne", quantity: 200, unit: "g"),
+                   Ingredient(id: 1, name: "crushed tomatoes", quantity: 400, unit: "g"),
+                   Ingredient(id: 2, name: "garlic", quantity: 3, unit: "cloves"),
+                   Ingredient(id: 3, name: "chilli flakes", quantity: 1, unit: "tsp"),
+                   Ingredient(id: 4, name: "basil", quantity: 1, unit: "bunch"),
+                   Ingredient(id: 5, name: "parmesan", quantity: 30, unit: "g"),
+               ], steps: [
+                   MethodStep(id: 1, instruction: "Boil the penne in well-salted water.", seconds: 600),
+                   MethodStep(id: 2, instruction: "Fry garlic and chilli in olive oil, add the tomatoes and simmer.", seconds: 600),
+                   MethodStep(id: 3, instruction: "Toss the pasta through the sauce with basil and parmesan.", seconds: 0),
+               ]),
+        Recipe(id: "cannelloni", name: "Spinach & Ricotta Cannelloni", category: "Dinner", minutes: 50, baseServings: 4,
+               description: "Pasta tubes filled with spinach and ricotta, baked under tomato and mozzarella.", ingredients: [
+                   Ingredient(id: 0, name: "cannelloni tubes", quantity: 12, unit: ""),
+                   Ingredient(id: 1, name: "spinach", quantity: 300, unit: "g"),
+                   Ingredient(id: 2, name: "ricotta", quantity: 250, unit: "g"),
+                   Ingredient(id: 3, name: "crushed tomatoes", quantity: 400, unit: "g"),
+                   Ingredient(id: 4, name: "mozzarella", quantity: 125, unit: "g"),
+                   Ingredient(id: 5, name: "nutmeg", quantity: 1, unit: "pinch"),
+               ], steps: [
+                   MethodStep(id: 1, instruction: "Wilt the spinach, squeeze it dry and mix with ricotta and nutmeg.", seconds: 0),
+                   MethodStep(id: 2, instruction: "Fill the tubes and lay them in a baking dish.", seconds: 0),
+                   MethodStep(id: 3, instruction: "Cover with tomatoes and torn mozzarella.", seconds: 0),
+                   MethodStep(id: 4, instruction: "Bake at 190°C until bubbling.", seconds: 1800),
+               ]),
+        Recipe(id: "teriyaki", name: "Honey Teriyaki Salmon", category: "Dinner", minutes: 30, baseServings: 2,
+               description: "Glossy honey-soy glazed salmon, great with rice and greens.", ingredients: [
+                   Ingredient(id: 0, name: "salmon fillets", quantity: 2, unit: ""),
+                   Ingredient(id: 1, name: "soy sauce", quantity: 3, unit: "tbsp"),
+                   Ingredient(id: 2, name: "honey", quantity: 2, unit: "tbsp"),
+                   Ingredient(id: 3, name: "ginger", quantity: 1, unit: "thumb"),
+                   Ingredient(id: 4, name: "garlic", quantity: 2, unit: "cloves"),
+                   Ingredient(id: 5, name: "rice", quantity: 150, unit: "g"),
+               ], steps: [
+                   MethodStep(id: 1, instruction: "Start the rice.", seconds: 900),
+                   MethodStep(id: 2, instruction: "Mix soy, honey, grated ginger and garlic.", seconds: 0),
+                   MethodStep(id: 3, instruction: "Sear the salmon, pour in the glaze and reduce until sticky.", seconds: 480),
+                   MethodStep(id: 4, instruction: "Serve over rice with sesame seeds.", seconds: 0),
+               ]),
+    ]
+}
